@@ -1,0 +1,60 @@
+{
+    "categories": [
+        {
+            "id": "1",
+            "title": "Elektronik"
+        },
+        {
+            "id": "2",
+            "title": "Automative"
+        },
+        {
+            "id": "3",
+            "title": "Fast-Food"
+        },
+        {
+            "id": "4",
+            "title": "Industry"
+        },
+        {
+            "id": "5",
+            "title": "Sport"
+        },
+        {
+            "id": "6",
+            "title": "Programmming"
+        },
+        {
+            "id": "7",
+            "title": "Engeneering"
+        },
+        {
+            "id": "8",
+            "title": "Astrology"
+        },
+        {
+            "id": "9",
+            "title": "Space"
+        },
+        {
+            "id": "10",
+            "title": "Hydraulic"
+        },        
+        {
+            "id": "11",
+            "title": "Hydraulin"
+        },
+        {
+            "id": "12",
+            "title": "Hydraulijk"
+        },
+        {
+            "id": "13",
+            "title": "Hydraulih"
+        },
+        {
+            "id": "14",
+            "title": "Hydrauliy"
+        }
+    ]
+}

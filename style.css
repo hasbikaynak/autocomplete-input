@@ -1,0 +1,49 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.autocomplete-input {
+    padding: 0.5rem 0.8rem;
+    margin-top: 3rem;
+}
+
+.autocomplete-container {
+    position: relative;
+    width: 186px;
+}
+
+.list {
+    position: absolute;    
+    background: #ddd;
+    width: 100%;
+    cursor: pointer;    
+}
+
+ul.list li {
+    background: #ddd;
+    padding: .2rem .5rem;
+    border-bottom: 1px solid #000;
+}
+
+ul.list li.active,
+ul.list li:hover{ 
+    background: chocolate;
+    color: #fff;
+}
+
+d-block {
+    display: block;
+}
+
+d-none {
+    display: none;
+}
