@@ -3,40 +3,23 @@
 const input = document.querySelector('.autocomplete-input')
 const list = document.querySelector('ul.list')
 
-// Fetch Api Ajax
-input.addEventListener('keyup', function(event) {
-   
-        
-    switch(event.key) {
-        case 'ArrowDown': pressKeyDown(); break;
-        case 'Enter'    : pressEnter();   break;
-        default         : pressClick();
 
-
-
+const pressKeyDown = () => {
+    let activeContains = false
+    // Tüm elementleri kontrol edip active class olan var ise değişkeni true yaptık
+    for(let li of list.querySelectorAll('li')) { 
+        if(li.classList.contains('active')) {
+            activeContains = true
+            break
+        }
     }
- 
-    // if(event.key === 'ArrowDown') {     
-    //     pressKeyDown()        
-    // } else if(event.key === 'Enter') {
-    //     pressEnter()
-    // }else {
-    //      pressClick()
-               
-    // }
- 
-})
-
-
-
-
-
-function capitalFirstLetter() {
-    input.value.charAt(0).toUpperCase() + input.value.substring(1)    
-}
-
-function pressKeyDown() {        
-    // console.log(list.querySelector('li:first-child'))
+    // Değişken hala false ise ve ilk element mevcutsa active class ı ilk elemente atadık
+    if(activeContains === false && list.querySelector('li:first-child')) {       
+        list.querySelector('li:first-child').classList.add('active')
+        return
+    } 
+    // Değişken true ise bir sonraki elementi active yaptık 
+    // Yukarıda return kullandığımızdan else kullanmamıza gerek kalmadı
     for(let li of list.querySelectorAll('li')) {            
         if(li.classList.contains('active')) {
             li.classList.remove('active')      
@@ -45,104 +28,110 @@ function pressKeyDown() {
             if(li.nextSibling) li.nextSibling.classList.add('active')                
             break;
         }
-    }    
+    } 
 }
 
-function pressEnter() {
+const pressKeyUp = () => { 
+    let activeContains = false
+    // Tüm elementleri kontrol edip active class olan var ise değişkeni true yaptık
+    for(let li of list.querySelectorAll('li')) { 
+        if(li.classList.contains('active')) {
+            activeContains = true
+            break
+        }
+    }
+    // Değişken hala false ise ve ilk element mevcutsa active class ı ilk elemente atadık
+    if(activeContains === false && list.querySelector('li:last-child')) {       
+        list.querySelector('li:last-child').classList.add('active')
+        return
+    } 
+    // Değişken true ise bir sonraki elementi active yaptık 
+    // Yukarıda return kullandığımızdan else kullanmamıza gerek kalmadı
+    for(let li of list.querySelectorAll('li')) {            
+        if(li.classList.contains('active')) {
+            li.classList.remove('active')             
+            if(li.previousSibling) li.previousSibling.classList.add('active')                
+            break;
+
+        }
+    }  
+      
+}
+
+const emptyList = () => {
+    list.classList.remove('d-block')
+    list.classList.add('d-none')
+    list.innerHTML = '' 
+}
+
+const pressEnter = () => {
     for(let li of list.querySelectorAll('li')) { 
         if(li.classList.contains('active')) {
             input.value = li.textContent
+             emptyList()         
+        }
+    }      
+}
+
+const fetchCategories = async () => {
+    const response = await fetch('categories.json')
+    return await response.json()
+}
+
+const capitalFirstLetter = string => {
+    return string.charAt(0).toUpperCase() + string.substring(1)
+}
+
+const showList = () => {
+    list.classList.remove('d-none')
+    list.classList.add('d-block')     
+}
+
+const clickListElement = event => {
+    // Tıklanan elementin textContent değeri inputun value suna atandı
+    input.value = event.target.textContent
+    emptyList()
+}
+
+const createList = categorieName => {       
+    let listElement = document.createElement('li');
+    listElement.textContent = categorieName
+    // Oluşturulan list elementi listeye ekledik
+    list.appendChild(listElement)
+
+    list.querySelectorAll('li').forEach(liElement => {
+        liElement.addEventListener('click', clickListElement)
+    })
+    // listeyi görünür kıldık
+    showList()
+}
+
+const typeWords = () => {
+    fetchCategories()
+        .then(response => {    
+            // İlk harf büyütüldü                 
+            const valueWithUpperCase = capitalFirstLetter(input.value)
+            // Liste temizlendi
             emptyList()
-            visibleList()                
-        }
-    }    
-}
 
-function visibleList(){
-    list.classList.remove('d-block')
-    list.classList.add('d-none')
-}
+            response.categories.forEach(categorie => {               
+                if(valueWithUpperCase !== '' && categorie.title.includes(valueWithUpperCase)) {
+                    // Liste tekrar oluşturuldu
+                    createList(categorie.title)
+                }
+            });
 
-function emptyList() {
-    list.innerHTML = ''
-}
-
-
-function pressClick() {
-    const value = input.value.charAt(0).toUpperCase() + input.value.substring(1) ; 
-    // console.log(event)
-    fetch('./categories.json') 
-    .then((res) => res.json())
-    .then(res => {
-        
-        let categorieArray = []
-        for(let cat of res.categories) {
-            categorieArray.push(cat.title)
-        }
-
-        list.classList.remove('d-block')
-        list.classList.add('d-none')
-        list.innerHTML = ''
-
-        categorieArray.forEach((item) => {                     
-            if(item.includes(value) && value !== '') {         
-                // Yeni bir list element oluşturduk       
-                let listElement = document.createElement('li');
-                listElement.textContent = item
-                // Oluşturulan list elementi listeye ekledik
-                list.appendChild(listElement)
-                // listeyi görünür kıldık
-                list.classList.remove('d-block')
-                list.classList.add('d-none')
-                // list.style.display = 'block';// Fetch Api Ajax 
-                console.log(categorieArray)               
-                categorieArray.forEach((item) => {
-                    if(item.includes(value) && value !== '') {         
-                        // Yeni bir list element oluşturduk       
-                        let listElement = document.createElement('li');
-                        listElement.textContent = item    
-                        // Oluşturulan list elementi listeye ekledik
-                        list.appendChild(listElement)    
-                        // listeyi görünür kıldık
-                        list.classList.remove('d-block')
-                        list.classList.add('d-none')
-                        // list.style.display = 'block';
-                        // Listenin ilk elemanını active getirdik
-                        list.querySelector('li:first-child').classList.add('active');    
-                        for(let li of list.querySelectorAll('li')) {
-                            li.addEventListener('click', function() {
-                                input.value = li.textContent                       
-                                list.classList.remove('d-block')
-                                list.classList.add('d-none')
-                                 list.innerHTML = ''
-
-                            })                
-                        }
-                    }    
-                })               
-            }
         })
-    })     
+
 }
 
-// to do list 
-/* 1-) enter basildiginda secilsin input valuesu degissin
-2-) kategori json buyut
-3-)arama yerinde ilk harfi buyult
-4-)scrollbar ekle - styli duzelt ve gozden gecir. */
+const autocomplete = (event) => {
+    switch(event.key) {
+        case 'ArrowDown'   : pressKeyDown(); break;
+        case 'ArrowUp'     : pressKeyUp();   break;
+        case 'Enter'       : pressEnter();   break;
+        default            : typeWords();
+    }
+}
 
-
-
-// function categories() {
-
-// }
-
-// const exampleFunc = () => {
-
-// }
-
-// const exampleFunc = function(param) {
-//     console.log(param)
-// }
-
-// const exampleFunc = pram => console.log(param)
+input.addEventListener('keyup', autocomplete)
