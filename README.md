@@ -21,7 +21,7 @@
  
  ![image](https://user-images.githubusercontent.com/73940626/114081980-8a2e8200-98ad-11eb-816b-fc5e92115114.png)
  
- 5-)And finally we select our element, after that our below list is gonna disappear.
+ 5-)And finally we select our element and our element is assigning into the input type, after that our below list is gonna disappear.
  
  ![image](https://user-images.githubusercontent.com/73940626/114081262-9fef7780-98ac-11eb-811d-81ee9e004905.png)
 
