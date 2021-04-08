@@ -1,37 +1,23 @@
-## Welcome to GitHub Pages
+"# autocomplete-input"
 
-You can use the [editor on GitHub](https://github.com/M-Hasbi/autocomplete-input/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
+Here my goal is understanding of using list of first-child , last-child and th-child and while using that how input text is autocompleted by functions. Besides that, I also played a bit on CSS side.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+1-)Let's have a look at our mini project.
 
-### Markdown
+image
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+2-)When we click on the area of input, border of input is changing into blue color.
 
-```markdown
-Syntax highlighted code block
+image
 
-# Header 1
-## Header 2
-### Header 3
+3-)Let's type something and see what is gonna happen.
 
-- Bulleted
-- List
+image
 
-1. Numbered
-2. List
+4-)If we slide on the list of element; firstly the background color is changing and the element that we point out is slightly moving to the left side. Secondly, we can move on in the list using upper and down event keys. Our mini project also contains that feature.
 
-**Bold** and _Italic_ and `Code` text
+image
 
-[Link](url) and ![Image](src)
-```
+5-)And finally we select our element and our element is assigning into the input type, after that our below list is gonna disappear.
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/M-Hasbi/autocomplete-input/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+image
