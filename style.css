@@ -29,8 +29,7 @@ body{
     text-transform: capitalize;
     padding: 0.5rem 0.8rem;
     margin-top: 3rem;
-    min-height: 3rem;
-    min-width: 30rem; 
+    min-height: 3rem; 
     border: radius 4px; 
     border: 2px solid #aaa;
     outline:none;
